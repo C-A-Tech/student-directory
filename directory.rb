@@ -1,4 +1,3 @@
-# lets put all studnets into an array
 students = [
   "Dr. Hannibal Lecter",
   "Darth Vader",
@@ -12,11 +11,19 @@ students = [
   "Joffrey Baratheon",
   "Norman Bates"
 ]
-# and then print them
-puts "The students of Villains Academy"
-puts "-------------"
-students.each do |student|
-  puts student
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
 end
-# finally we print the total number of students
-print "Overall, we have #{students.count} great students"
+def print_names(names)
+  names.each do |name|
+    puts name
+  end
+end
+def print_footer(names)
+  print "Overall, we have #{names.count} great students"
+end
+
+print_header
+print_names(students)
+print_footer(students)
