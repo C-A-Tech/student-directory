@@ -12,8 +12,10 @@ def input_students
     end
     puts "Whats their favourite hobby?"
     hobby = gets.chomp
+    # push all inputs into empty array
     students << {name: name, cohort: month.to_sym, hobbies: hobby}
     puts "Now we have #{students.count} students"
+    # reset loop
     puts "Next?"
     name = gets.chomp
   end
@@ -26,7 +28,9 @@ def print_header
 end
 
 def print_names(students)
+  # set an accumulator so loop can be broken
   total_names = 0
+  #use until loop to print studnet details until total numbers matches all total number of students
   until total_names == students.count
     students.each_with_index do |student, index|
       puts "#{index + 1}. #{student[:name]}--> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}".center(100)
@@ -56,9 +60,23 @@ def print_names_less_than_12_char(students)
     end
   end
 end
+
+def print_grouped_cohort(students)
+  puts "Select a cohort"
+  cohort = gets.chomp.to_sym
+  # only print students who are in the specified cohort
+  students.select do |student|
+    if student[:cohort] == cohort
+      puts "#{student[:name]}--> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
+    end
+  end
+end
+
+
 students = input_students
 print_header
-print_names(students)
+#print_names(students)
 #print_names_that_start_with(students)
 #print_names_less_than_12_char(students)
+print_grouped_cohort(students)
 print_footer(students)
