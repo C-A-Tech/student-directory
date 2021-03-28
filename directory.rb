@@ -84,6 +84,15 @@ def save_students
   file.close
 end
 
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, cohort, hobby = line.chomp.split(",")
+    @students << {name: name, cohort: cohort.to_sym, hobbies: hobby}
+  end
+  file.close
+end
+	
 def print_footer
   if @students.count > 1
     puts "Overall, we have #{@students.count} great students"
@@ -97,6 +106,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the list from students.csv"
   puts "9. Exit" 
 end
 
@@ -114,6 +124,8 @@ def process(selection)
     show_students
   when "3"
     save_students
+  when "4"
+    load_students
   when "9"
     exit 
   else
