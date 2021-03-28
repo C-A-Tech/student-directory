@@ -4,10 +4,17 @@ def input_students
   students = []
   name = gets.chomp
   while !name.empty? do
+    puts "What cohort are they in?"
+    month = gets.chomp
+    # set a default month if no cohort entered
+    if month == ""
+      month = "november"
+    end
     puts "Whats their favourite hobby?"
     hobby = gets.chomp
-    students << {name: name, cohort: :november, hobbies: hobby}
+    students << {name: name, cohort: month.to_sym, hobbies: hobby}
     puts "Now we have #{students.count} students"
+    puts "Next?"
     name = gets.chomp
   end
   students
