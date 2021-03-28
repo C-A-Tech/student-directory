@@ -22,7 +22,7 @@ def print_names(students)
   total_names = 0
   until total_names == students.count
     students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]}--> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
+      puts "#{index + 1}. #{student[:name]}--> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}".center(100)
       total_names += 1
     end
   end
