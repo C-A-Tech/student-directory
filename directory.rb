@@ -22,7 +22,17 @@ end
 def print_footer(students)
   print "Overall, we have #{students.count} great students"
 end
+def print_names_that_start_with(students)
+  puts "What letter would you like to search for?"
+  letter = gets.chomp
+  students.each do |student|
+    if student[:name][0] == letter
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
 students = input_students
 print_header
-print_names(students)
+#print_names(students)
+print_names_that_start_with(students)
 print_footer(students)
