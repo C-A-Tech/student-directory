@@ -10,18 +10,26 @@ def input_students
   end
   students
 end
+
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
+
 def print_names(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  total_names = 0
+  until total_names == students.count
+    students.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      total_names += 1
+    end
   end
 end
+
 def print_footer(students)
   print "Overall, we have #{students.count} great students"
 end
+
 def print_names_that_start_with(students)
   puts "What letter would you like to search for?"
   letter = gets.chomp
@@ -31,6 +39,7 @@ def print_names_that_start_with(students)
     end
   end
 end
+
 def print_names_less_than_12_char(students)
   students.each do |student|
     if student[:name].length < 12
@@ -40,7 +49,7 @@ def print_names_less_than_12_char(students)
 end
 students = input_students
 print_header
-#print_names(students)
+print_names(students)
 #print_names_that_start_with(students)
-print_names_less_than_12_char(students)
+#print_names_less_than_12_char(students)
 print_footer(students)
