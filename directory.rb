@@ -14,9 +14,14 @@ def input_students
     hobby = gets.chomp
     # push all inputs into empty array
     students << {name: name, cohort: month.to_sym, hobbies: hobby}
-    puts "Now we have #{students.count} students"
+    # conditional statment that prints plural version of the below string if more than 1 student
+    if students.count > 1
+      puts "Now we have #{students.count} students"
+    else 
+      puts "Now we have #{students.count} student"
+    end
     # reset loop
-    puts "Next?"
+    puts "Next student?"
     name = gets.chomp
   end
   students
