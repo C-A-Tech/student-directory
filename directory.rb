@@ -4,7 +4,9 @@ def input_students
   students = []
   name = gets.chomp
   while !name.empty? do
-    students << {name: name, cohort: :november}
+    puts "Whats their favourite hobby?"
+    hobby = gets.chomp
+    students << {name: name, cohort: :november, hobbies: hobby}
     puts "Now we have #{students.count} students"
     name = gets.chomp
   end
@@ -20,7 +22,7 @@ def print_names(students)
   total_names = 0
   until total_names == students.count
     students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      puts "#{index + 1}. #{student[:name]}--> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
       total_names += 1
     end
   end
