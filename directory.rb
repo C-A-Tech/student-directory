@@ -38,14 +38,10 @@ def print_names(students)
   #use until loop to print studnet details until total numbers matches all total number of students
   until total_names == students.count
     students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]}--> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}".center(100)
+      puts "#{index + 1}. #{student[:name]} --> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
       total_names += 1
     end
   end
-end
-
-def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
 end
 
 def print_names_that_start_with(students)
@@ -72,8 +68,16 @@ def print_grouped_cohort(students)
   # only print students who are in the specified cohort
   students.select do |student|
     if student[:cohort] == cohort
-      puts "#{student[:name]}--> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
+      puts "#{student[:name]} --> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
     end
+  end
+end
+
+def print_footer(students)
+  if students.count > 1
+    puts "Overall, we have #{students.count} great students"
+  else 
+    puts "Overall, we have #{students.count} great student"
   end
 end
 
