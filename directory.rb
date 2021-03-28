@@ -31,8 +31,16 @@ def print_names_that_start_with(students)
     end
   end
 end
+def print_names_less_than_12_char(students)
+  students.each do |student|
+    if student[:name].length < 12
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
 students = input_students
 print_header
 #print_names(students)
-print_names_that_start_with(students)
+#print_names_that_start_with(students)
+print_names_less_than_12_char(students)
 print_footer(students)
