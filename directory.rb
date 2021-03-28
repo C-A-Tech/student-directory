@@ -2,16 +2,16 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   students = []
-  name = gets.chomp
+  name = gets.delete!("\n")
   while !name.empty? do
     puts "What cohort are they in?"
-    month = gets.chomp
+    month = gets.delete!("\n")
     # set a default month if no cohort entered
     if month == ""
       month = "november"
     end
     puts "Whats their favourite hobby?"
-    hobby = gets.chomp
+    hobby = gets.delete!("\n")
     # push all inputs into empty array
     students << {name: name, cohort: month.to_sym, hobbies: hobby}
     # conditional statment that prints plural version of the below string if more than 1 student
@@ -22,7 +22,7 @@ def input_students
     end
     # reset loop
     puts "Next student?"
-    name = gets.chomp
+    name = gets.delete!("\n")
   end
   students
 end
@@ -50,7 +50,7 @@ end
 
 def print_names_that_start_with(students)
   puts "What letter would you like to search for?"
-  letter = gets.chomp
+  letter = gets.delete!("\n")
   students.each do |student|
     if student[:name][0] == letter
       puts "#{student[:name]} (#{student[:cohort]} cohort)"
@@ -68,7 +68,7 @@ end
 
 def print_grouped_cohort(students)
   puts "Select a cohort"
-  cohort = gets.chomp.to_sym
+  cohort = gets.delete!("\n").to_sym
   # only print students who are in the specified cohort
   students.select do |student|
     if student[:cohort] == cohort
