@@ -1,8 +1,10 @@
+@students = [] #an empty array that is accessible to all methods
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  students = []
   name = gets.delete!("\n")
+
   while !name.empty? do
     puts "What cohort are they in?"
     month = gets.delete!("\n")
@@ -13,18 +15,17 @@ def input_students
     puts "Whats their favourite hobby?"
     hobby = gets.delete!("\n")
     # push all inputs into empty array
-    students << {name: name, cohort: month.to_sym, hobbies: hobby}
+    @students << {name: name, cohort: month.to_sym, hobbies: hobby}
     # conditional statment that prints plural version of the below string if more than 1 student
-    if students.count > 1
-      puts "Now we have #{students.count} students"
+    if @students.count > 1
+      puts "Now we have #{@students.count} students"
     else 
-      puts "Now we have #{students.count} student"
+      puts "Now we have #{@students.count} student"
     end
     # reset loop
     puts "Next student?"
     name = gets.delete!("\n")
   end
-  students
 end
 
 def print_header
@@ -32,81 +33,88 @@ def print_header
   puts "-------------"
 end
 
-def print_names(students)
+def print_students_list
   # set an accumulator so loop can be broken
   total_names = 0
   #use until loop to print studnet details until total numbers matches all total number of students
-  until total_names == students.count
-    students.each_with_index do |student, index|
+  until total_names == @students.count
+    @students.each_with_index do |student, index|
       puts "#{index + 1}. #{student[:name]} --> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
       total_names += 1
     end
   end
 end
 
-def print_names_that_start_with(students)
+def print_names_that_start_with
   puts "What letter would you like to search for?"
   letter = gets.delete!("\n")
-  students.each do |student|
+  @students.each do |student|
     if student[:name][0] == letter
       puts "#{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
 end
 
-def print_names_less_than_12_char(students)
-  students.each do |student|
+def print_names_less_than_12_char
+  @students.each do |student|
     if student[:name].length < 12
       puts "#{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
 end
 
-def print_grouped_cohort(students)
+def print_grouped_cohort
   puts "Select a cohort"
   cohort = gets.delete!("\n").to_sym
   # only print students who are in the specified cohort
-  students.select do |student|
+  @students.select do |student|
     if student[:cohort] == cohort
       puts "#{student[:name]} --> cohort: #{student[:cohort]}, favourite hobby: #{student[:hobbies]}"
     end
   end
 end
 
-def print_footer(students)
-  if students.count > 1
-    puts "Overall, we have #{students.count} great students"
+def print_footer
+  if @students.count > 1
+    puts "Overall, we have #{@students.count} great students"
   else 
-    puts "Overall, we have #{students.count} great student"
+    puts "Overall, we have #{@students.count} great student"
+  end
+end
+
+def print_menu
+  puts "Select one of the following options"
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit" 
+end
+
+def show_students
+  print_header
+  print_students_list
+  print_footer
+end
+
+def process(selection)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit 
+  else
+    puts "I don't know what you meant, try again"
   end
 end
 
 def interactive_menu
-  students = []
   loop do
-    # print the menu and ask the user to select an option
-    puts "Select one of the following options"
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit" 
-    
-    selection = gets.chomp
-    
-    case selection
-    when "1"
-      students = input_students
-    when "2"
-      print_header
-      print_names(students)
-      print_footer(students)
-    when "9"
-      exit 
-    else
-      puts "I don't know what you meant, try again"
-    end
+    print_menu
+    process(gets.chomp)
   end
 end
 interactive_menu
-#print_names(students)
-#print_names_that_start_with(students)
-#print_names_less_than_12_char(students)
+#print_names
+#print_names_that_start_with
+#print_names_less_than_12_char
