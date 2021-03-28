@@ -45,7 +45,7 @@ def print_names(students)
 end
 
 def print_footer(students)
-  print "Overall, we have #{students.count} great students"
+  puts "Overall, we have #{students.count} great students"
 end
 
 def print_names_that_start_with(students)
@@ -77,11 +77,32 @@ def print_grouped_cohort(students)
   end
 end
 
-
-students = input_students
-print_header
+def interactive_menu
+  students = []
+  loop do
+    # print the menu and ask the user to select an option
+    puts "Select one of the following options"
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit" 
+    
+    selection = gets.chomp
+    
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      print_header
+      print_names(students)
+      print_footer(students)
+    when "9"
+      exit 
+    else
+      puts "I don't know what you meant, try again"
+    end
+  end
+end
+interactive_menu
 #print_names(students)
 #print_names_that_start_with(students)
 #print_names_less_than_12_char(students)
-print_grouped_cohort(students)
-print_footer(students)
